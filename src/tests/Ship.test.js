@@ -42,3 +42,26 @@ describe("Ship hit method", () => {
         expect(ship.hits).toBe(3);
     });
 });
+
+describe("Ship isSunk method", () => {
+    test("Not sunk if hits is less than size", () => {
+        const ship = new Ship("battleship");
+
+        ship.hit();
+        ship.hit();
+        ship.hit();
+
+        expect(ship.isSunk()).toBe(false);
+    });
+
+    test("Sunk if hits equals size", () => {
+        const ship = new Ship("battleship");
+
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        ship.hit();
+
+        expect(ship.isSunk()).toBe(true);
+    });
+});
