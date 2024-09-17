@@ -16,6 +16,10 @@ export default class Ship {
         this.#hits += 1;
     }
 
+    isSunk() {
+        return this.#hits === this.#size;
+    }
+
     get type() {
         return this.#type;
     }
