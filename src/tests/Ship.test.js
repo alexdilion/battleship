@@ -1,4 +1,5 @@
 import Ship from "../modules/model/Ship";
+import repeat from "../modules/util/repeat";
 
 describe("Ship constructor", () => {
     test("Returns a ship", () => {
@@ -35,9 +36,7 @@ describe("Ship hit method", () => {
 
         expect(ship.hits).toBe(0);
 
-        for (let i = 0; i < 10; i++) {
-            ship.hit();
-        }
+        repeat(() => ship.hit(), 10);
 
         expect(ship.hits).toBe(3);
     });
@@ -47,9 +46,7 @@ describe("Ship isSunk method", () => {
     test("Not sunk if hits is less than size", () => {
         const ship = new Ship("battleship");
 
-        ship.hit();
-        ship.hit();
-        ship.hit();
+        repeat(() => ship.hit(), 3);
 
         expect(ship.isSunk()).toBe(false);
     });
@@ -57,10 +54,7 @@ describe("Ship isSunk method", () => {
     test("Sunk if hits equals size", () => {
         const ship = new Ship("battleship");
 
-        ship.hit();
-        ship.hit();
-        ship.hit();
-        ship.hit();
+        repeat(() => ship.hit(), 4);
 
         expect(ship.isSunk()).toBe(true);
     });
