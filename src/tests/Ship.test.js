@@ -1,14 +1,16 @@
 import Ship from "../modules/model/Ship";
 
-test("Returns a ship", () => {
-    const ship = new Ship("destroyer");
+describe("Ship constructor", () => {
+    test("Returns a ship", () => {
+        const ship = new Ship("destroyer");
 
-    expect(ship).toBeInstanceOf(Ship);
-});
+        expect(ship).toBeInstanceOf(Ship);
+    });
 
-test("Returns ship of correct type", () => {
-    const ship = new Ship("destroyer");
+    test("Returns ship of correct type", () => {
+        const ship = new Ship("destroyer");
 
-    expect(ship.getType()).toBe("destroyer");
-    expect(ship.getSize()).toBe(2);
+        expect(ship.type).toBe("destroyer");
+        expect(ship.size).toBe(2);
+    });
 });
