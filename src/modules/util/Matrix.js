@@ -1,6 +1,7 @@
 export default class Matrix {
     #rows;
     #columns;
+    #empty = true;
     #matrix = [];
 
     constructor(rows, columns, fillChar = 0) {
@@ -54,5 +55,10 @@ export default class Matrix {
 
     setValue(value, row, column) {
         this.#matrix[row][column] = value;
+        this.#empty = false;
+    }
+
+    isEmpty() {
+        return this.#empty;
     }
 }
