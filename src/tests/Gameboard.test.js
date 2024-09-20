@@ -8,11 +8,11 @@ describe("Gameboard constructor", () => {
         expect(gameboard).toBeInstanceOf(Gameboard);
     });
 
-    test("initial board is empty", () => {
+    test("starting board array is empty", () => {
         expect(gameboard.board.isEmpty()).toBe(true);
     });
 
-    test("initial hits array is empty", () => {
+    test("starting hits array is empty", () => {
         expect(gameboard.hits.isEmpty()).toBe(true);
     });
 });
