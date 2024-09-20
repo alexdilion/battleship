@@ -1,13 +1,13 @@
-export default class Matrix {
+export default class Array2d {
     #rows;
     #columns;
     #empty = true;
-    #matrix = [];
+    #array = [];
 
     constructor(rows, columns, fillChar = 0) {
         this.#rows = rows;
         this.#columns = columns;
-        this.#matrix = [];
+        this.#array = [];
 
         for (let i = 0; i < rows; i++) {
             let row = [];
@@ -15,7 +15,7 @@ export default class Matrix {
                 row.push(fillChar);
             }
 
-            this.#matrix.push(row);
+            this.#array.push(row);
         }
     }
 
@@ -28,7 +28,7 @@ export default class Matrix {
             );
         }
 
-        return this.#matrix[row];
+        return this.#array[row];
     }
 
     getColumn(col) {
@@ -42,19 +42,19 @@ export default class Matrix {
 
         return Array(this.#columns)
             .fill(0)
-            .map((_, i) => this.#matrix[i][col]);
+            .map((_, i) => this.#array[i][col]);
     }
 
-    getMatrix() {
-        return this.#matrix;
+    getArray() {
+        return this.#array;
     }
 
     getValue(row, column) {
-        return this.#matrix[row][column];
+        return this.#array[row][column];
     }
 
     setValue(value, row, column) {
-        this.#matrix[row][column] = value;
+        this.#array[row][column] = value;
         this.#empty = false;
     }
 
