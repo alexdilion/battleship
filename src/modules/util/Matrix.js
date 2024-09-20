@@ -52,7 +52,7 @@ export default class Matrix {
         return this.#matrix[row][column];
     }
 
-    setValue(row, column) {
-        this.#matrix[row][column];
+    setValue(value, row, column) {
+        this.#matrix[row][column] = value;
     }
 }
