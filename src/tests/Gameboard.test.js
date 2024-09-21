@@ -1,9 +1,13 @@
 import Gameboard from "../modules/model/Gameboard";
-import Array2d from "../modules/util/Array2d";
+import Ship from "../modules/model/Ship";
+
+let gameboard = new Gameboard();
+
+afterEach(() => {
+    gameboard = new Gameboard();
+});
 
 describe("Gameboard constructor", () => {
-    const gameboard = new Gameboard();
-
     test("returns a Gameboard", () => {
         expect(gameboard).toBeInstanceOf(Gameboard);
     });
@@ -14,5 +18,22 @@ describe("Gameboard constructor", () => {
 
     test("starting hits array is empty", () => {
         expect(gameboard.hits.isEmpty()).toBe(true);
+    });
+});
+
+describe("Ship placement", () => {
+    const ship = new Ship("destroyer");
+
+    test("invalid position", () => {
+        const positions = [
+            [0, 9, false],
+            [0, -1, false],
+            [-1, 0, true],
+            [9, 0, true],
+        ];
+
+        positions.forEach((args) => {
+            expect(gameboard.place(ship, ...args)).toBe(false);
+        });
     });
 });
