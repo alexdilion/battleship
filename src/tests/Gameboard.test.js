@@ -51,4 +51,42 @@ describe("Ship placement", () => {
             expect(gameboard.place(ship, ...args)).toBe(true);
         });
     });
+
+    test("ship references added to board when placed", () => {
+        gameboard.place(ship, 0, 0, false);
+
+        expect(
+            gameboard.board
+                .getRow(0)
+                .slice(0, ship.size)
+                .every((v) => Object.is(ship, v))
+        ).toBe(true);
+
+        expect(
+            gameboard.board
+                .getRow(0)
+                .slice(ship.size)
+                .some((v) => Object.is(ship, v))
+        ).toBe(false);
+    });
+
+    test("ship references added to board when placed (vertical)", () => {
+        gameboard.place(ship, 0, 0, true);
+
+        expect(
+            gameboard.board
+                .getColumn(0)
+                .slice(0, ship.size)
+                .every((v) => Object.is(ship, v))
+        ).toBe(true);
+
+        expect(
+            gameboard.board
+                .getColumn(0)
+                .slice(ship.size)
+                .some((v) => Object.is(ship, v))
+        ).toBe(false);
+
+        console.log(gameboard.board.getArray())
+    });
 });
