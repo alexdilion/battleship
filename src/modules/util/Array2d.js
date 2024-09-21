@@ -31,6 +31,12 @@ export default class Array2d {
         return this.#array[row];
     }
 
+    setRowValues(value, row, start, end) {
+        for (let i = start; i < end; i++) {
+            this.setValue(value, row, i);
+        }
+    }
+
     getColumn(col) {
         if (this.#columns <= col || col < 0) {
             throw new Error(
@@ -43,6 +49,12 @@ export default class Array2d {
         return Array(this.#columns)
             .fill(0)
             .map((_, i) => this.#array[i][col]);
+    }
+
+    setColumnValues(value, column, start, end) {
+        for (let i = start; i < end; i++) {
+            this.setValue(value, i, column);
+        }
     }
 
     getArray() {
