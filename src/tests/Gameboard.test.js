@@ -24,7 +24,7 @@ describe("Gameboard constructor", () => {
 describe("Ship placement", () => {
     const ship = new Ship("destroyer");
 
-    test("invalid position", () => {
+    test("invalid positions", () => {
         const positions = [
             [0, 9, false],
             [0, -1, false],
@@ -34,6 +34,21 @@ describe("Ship placement", () => {
 
         positions.forEach((args) => {
             expect(gameboard.place(ship, ...args)).toBe(false);
+        });
+    });
+
+    test("valid positions", () => {
+        const positions = [
+            [0, 8, false],
+            [0, 0, false],
+            [9, 8, false],
+            [0, 0, true],
+            [8, 0, true],
+            [8, 9, true],
+        ];
+
+        positions.forEach((args) => {
+            expect(gameboard.place(ship, ...args)).toBe(true);
         });
     });
 });
