@@ -57,6 +57,21 @@ export default class Gameboard {
         return true;
     }
 
+    receiveAttack(row, column) {
+        if (this.#hits.getValue(row, column) !== 0) {
+            return 0;
+        }
+
+        if (this.#board.getValue(row, column) === 0) {
+            this.#hits.setValue(-1, row, column);
+            return -1;
+        } else {
+            this.#hits.setValue(1, row, column);
+            this.#board.getValue(row, column).hit();
+            return 1;
+        }
+    }
+
     get board() {
         return this.#board;
     }
