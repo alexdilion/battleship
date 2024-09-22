@@ -3,11 +3,11 @@ import Ship from "../modules/model/Ship";
 
 let gameboard = new Gameboard();
 
-afterEach(() => {
-    gameboard = new Gameboard();
-});
-
 describe("Gameboard constructor", () => {
+    afterEach(() => {
+        gameboard = new Gameboard();
+    });
+
     test("returns a Gameboard", () => {
         expect(gameboard).toBeInstanceOf(Gameboard);
     });
@@ -22,6 +22,10 @@ describe("Gameboard constructor", () => {
 });
 
 describe("Ship placement", () => {
+    afterEach(() => {
+        gameboard = new Gameboard();
+    });
+
     const ship = new Ship("destroyer");
     const ship2 = new Ship("carrier");
 
