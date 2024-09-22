@@ -11,6 +11,7 @@ export default class Gameboard {
     }
 
     #validatePosition(shipSize, row, column, rotated) {
+        // Check that the ship is placed INSIDE the board
         if (!rotated && (column < 0 || shipSize + column > this.#size)) {
             return false;
         }
@@ -22,9 +23,19 @@ export default class Gameboard {
         return true;
     }
 
+    // TODO:
+    // Check for overlap when placing
+    // Add ship and placement details to ships array
     place(ship, row, column, rotated) {
-        if (!this.#validatePosition(ship.size, row, column, rotated))
+        if (!this.#validatePosition(ship.size, row, column, rotated)) {
             return false;
+        }
+
+        if (rotated) {
+            this.#board.setColumnValues(ship, column, row, row + ship.size);
+        } else {
+            this.#board.setRowValues(ship, row, column, column + ship.size);
+        }
 
         return true;
     }
