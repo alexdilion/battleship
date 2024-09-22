@@ -2,12 +2,13 @@ import Gameboard from "../modules/model/Gameboard";
 import Ship from "../modules/model/Ship";
 
 let gameboard = new Gameboard();
+const ship = new Ship("destroyer");
+
+afterEach(() => {
+    gameboard = new Gameboard();
+});
 
 describe("Gameboard constructor", () => {
-    afterEach(() => {
-        gameboard = new Gameboard();
-    });
-
     test("returns a Gameboard", () => {
         expect(gameboard).toBeInstanceOf(Gameboard);
     });
@@ -22,11 +23,6 @@ describe("Gameboard constructor", () => {
 });
 
 describe("Ship placement", () => {
-    afterEach(() => {
-        gameboard = new Gameboard();
-    });
-
-    const ship = new Ship("destroyer");
     const ship2 = new Ship("carrier");
 
     test("invalid positions", () => {
@@ -108,11 +104,30 @@ describe("Ship placement", () => {
 });
 
 describe("Receiving attacks", () => {
-    test("misses are added to the hits array", () => {
-        gameboard.receiveAttack(0, 0);
+    test("missed attacks", () => {
+        expect(gameboard.receiveAttack(0, 0)).toBe(-1);
         expect(gameboard.hits.getValue(0, 0)).toBe(-1);
 
-        gameboard.receiveAttack(0, 1);
+        expect(gameboard.receiveAttack(0, 1)).toBe(-1);
         expect(gameboard.hits.getValue(0, 1)).toBe(-1);
+    });
+
+    test("successful attacks", () => {
+        gameboard.place(ship, 0, 0, false);
+
+        expect(gameboard.receiveAttack(0, 0)).toBe(1);
+        expect(gameboard.hits.getValue(0, 0)).toBe(1);
+        expect(gameboard.board.getValue(0, 0).hits).toBe(1);
+    });
+
+    test("attacks on already hit cell", () => {
+        gameboard.place(ship, 0, 0, false);
+        gameboard.receiveAttack(0, 0);
+
+        expect(gameboard.receiveAttack(0, 0)).toBe(0);
+        expect(gameboard.board.getValue(0, 0).hits).toBe(1);
+
+        gameboard.receiveAttack(1, 0);
+        expect(gameboard.receiveAttack(1, 0)).toBe(0);
     });
 });
