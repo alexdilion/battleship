@@ -106,3 +106,13 @@ describe("Ship placement", () => {
         expect(gameboard.ships.length).toBe(1);
     });
 });
+
+describe("Receiving attacks", () => {
+    test("misses are added to the hits array", () => {
+        gameboard.receiveAttack(0, 0);
+        expect(gameboard.hits.getValue(0, 0)).toBe(-1);
+
+        gameboard.receiveAttack(0, 1);
+        expect(gameboard.hits.getValue(0, 1)).toBe(-1);
+    });
+});
