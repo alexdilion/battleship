@@ -72,6 +72,10 @@ export default class Gameboard {
         }
     }
 
+    isGameOver() {
+        return this.#ships.every(value => value.ship.isSunk())
+    }
+
     get board() {
         return this.#board;
     }
