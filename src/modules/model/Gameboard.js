@@ -4,6 +4,7 @@ export default class Gameboard {
     #size = 10;
     #board;
     #hits;
+    #ships = [];
 
     constructor() {
         this.#board = new Array2d(this.#size, this.#size);
@@ -39,7 +40,6 @@ export default class Gameboard {
     }
 
     // TODO:
-    // Check for overlap when placing
     // Add ship and placement details to ships array
     place(ship, row, column, rotated) {
         if (!this.#validatePosition(ship.size, row, column, rotated)) {
@@ -52,11 +52,17 @@ export default class Gameboard {
             this.#board.setRowValues(ship, row, column, column + ship.size);
         }
 
+        this.#ships.push({ ship, row, column, rotated });
+
         return true;
     }
 
     get board() {
         return this.#board;
+    }
+
+    get ships() {
+        return this.#ships;
     }
 
     get hits() {
