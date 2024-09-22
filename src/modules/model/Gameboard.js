@@ -20,6 +20,21 @@ export default class Gameboard {
             return false;
         }
 
+        // Check that the ship does not overlap with other ships
+        if (!rotated) {
+            return this.#board
+                .getRow(row)
+                .slice(column, column + shipSize)
+                .every((v) => v === 0);
+        }
+
+        if (rotated) {
+            return this.#board
+                .getColumn(column)
+                .slice(row, row + shipSize)
+                .every((v) => v === 0);
+        }
+
         return true;
     }
 
