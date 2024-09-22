@@ -54,6 +54,12 @@ describe("Ship placement", () => {
         });
     });
 
+    test("no placement when overlapping", () => {
+        gameboard.place(ship, 0, 0, false);
+        expect(gameboard.place(ship2, 0, 0, true)).toBe(false);
+        expect(gameboard.place(ship2, 0, 0, false)).toBe(false);
+    });
+
     test("ship added to board when placed", () => {
         gameboard.place(ship, 0, 0, false);
 
@@ -90,9 +96,9 @@ describe("Ship placement", () => {
         ).toBe(false);
     });
 
-    test("no placement when overlapping", () => {
+    test("ship added to ships array when placed", () => {
+        expect(gameboard.ships.length).toBe(0);
         gameboard.place(ship, 0, 0, false);
-        expect(gameboard.place(ship2, 0, 0, true)).toBe(false);
-        expect(gameboard.place(ship2, 0, 0, false)).toBe(false);
+        expect(gameboard.ships.length).toBe(1);
     });
 });
