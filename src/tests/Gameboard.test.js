@@ -2,10 +2,11 @@ import Gameboard from "../modules/model/Gameboard";
 import Ship from "../modules/model/Ship";
 
 let gameboard = new Gameboard();
-const ship = new Ship("destroyer");
+let ship = new Ship("destroyer");
 
 afterEach(() => {
     gameboard = new Gameboard();
+    ship = new Ship("destroyer");
 });
 
 describe("Gameboard constructor", () => {
