@@ -23,6 +23,7 @@ describe("Gameboard constructor", () => {
 
 describe("Ship placement", () => {
     const ship = new Ship("destroyer");
+    const ship2 = new Ship("carrier");
 
     test("invalid positions", () => {
         const positions = [
@@ -49,10 +50,11 @@ describe("Ship placement", () => {
 
         positions.forEach((args) => {
             expect(gameboard.place(ship, ...args)).toBe(true);
+            gameboard = new Gameboard();
         });
     });
 
-    test("ship references added to board when placed", () => {
+    test("ship added to board when placed", () => {
         gameboard.place(ship, 0, 0, false);
 
         expect(
@@ -70,7 +72,7 @@ describe("Ship placement", () => {
         ).toBe(false);
     });
 
-    test("ship references added to board when placed (vertical)", () => {
+    test("ship added to board when placed (vertical)", () => {
         gameboard.place(ship, 0, 0, true);
 
         expect(
@@ -86,7 +88,11 @@ describe("Ship placement", () => {
                 .slice(ship.size)
                 .some((v) => Object.is(ship, v))
         ).toBe(false);
+    });
 
-        console.log(gameboard.board.getArray())
+    test("no placement when overlapping", () => {
+        gameboard.place(ship, 0, 0, false);
+        expect(gameboard.place(ship2, 0, 0, true)).toBe(false);
+        expect(gameboard.place(ship2, 0, 0, false)).toBe(false);
     });
 });
