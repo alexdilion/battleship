@@ -132,3 +132,38 @@ describe("Receiving attacks", () => {
         expect(gameboard.receiveAttack(1, 0)).toBe(0);
     });
 });
+
+describe("Check if game over", () => {
+    const ship2 = new Ship("submarine");
+    const ship3 = new Ship("destroyer");
+
+    gameboard.place(ship, 0, 0, false);
+    gameboard.place(ship2, 1, 0, false);
+    gameboard.place(ship3, 2, 0, false);
+
+    test("ships not sunk", () => {
+        expect(gameboard.isGameOver()).toBe(false);
+    });
+
+    test("some ships sunk", () => {
+        gameboard.receiveAttack(0, 0);
+        gameboard.receiveAttack(0, 1);
+        gameboard.receiveAttack(1, 0);
+        gameboard.receiveAttack(1, 1);
+        gameboard.receiveAttack(1, 2);
+
+        expect(gameboard.isGameOver()).toBe(false);
+    });
+
+    test("all ships sunk", () => {
+        gameboard.receiveAttack(0, 0);
+        gameboard.receiveAttack(0, 1);
+        gameboard.receiveAttack(1, 0);
+        gameboard.receiveAttack(1, 1);
+        gameboard.receiveAttack(1, 2);
+        gameboard.receiveAttack(2, 0);
+        gameboard.receiveAttack(2, 1);
+
+        expect(gameboard.isGameOver()).toBe(true);
+    });
+});
