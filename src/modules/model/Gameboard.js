@@ -2,9 +2,9 @@ import Array2d from "../util/Array2d";
 
 export default class Gameboard {
     #size = 10;
-    #board;
-    #hits;
     #ships = [];
+    #board;
+    #hits; // -1 = miss, 0 = empty, 1 = hit
 
     constructor() {
         this.#board = new Array2d(this.#size, this.#size);
@@ -39,8 +39,6 @@ export default class Gameboard {
         return true;
     }
 
-    // TODO:
-    // Add ship and placement details to ships array
     place(ship, row, column, rotated) {
         if (!this.#validatePosition(ship.size, row, column, rotated)) {
             return false;
@@ -73,7 +71,7 @@ export default class Gameboard {
     }
 
     isGameOver() {
-        return this.#ships.every(value => value.ship.isSunk())
+        return this.#ships.every((value) => value.ship.isSunk());
     }
 
     get board() {
