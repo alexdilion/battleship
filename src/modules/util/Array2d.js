@@ -61,12 +61,4 @@ export default class Array2d {
     isEmpty() {
         return this.#empty;
     }
-
-    getRowSize() {
-        return this.#rows;
-    }
-
-    getColumnSize() {
-        return this.#columns;
-    }
 }
