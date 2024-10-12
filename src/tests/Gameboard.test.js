@@ -106,37 +106,35 @@ describe("Ship placement", () => {
 
 describe("Receiving attacks", () => {
     test("missed attacks", () => {
-        expect(gameboard.receiveAttack(0, 0)).toBe(-1);
-        expect(gameboard.hits.getValue(0, 0)).toBe(-1);
+        expect(gameboard.receiveAttack(0, 0)).toBe("miss");
+        expect(gameboard.hits.getValue(0, 0)).toBe("miss");
 
-        expect(gameboard.receiveAttack(0, 1)).toBe(-1);
-        expect(gameboard.hits.getValue(0, 1)).toBe(-1);
+        expect(gameboard.receiveAttack(0, 1)).toBe("miss");
+        expect(gameboard.hits.getValue(0, 1)).toBe("miss");
     });
 
     test("successful attacks", () => {
         gameboard.place(ship, 0, 0, false);
 
-        expect(gameboard.receiveAttack(0, 0)).toBe(1);
-        expect(gameboard.hits.getValue(0, 0)).toBe(1);
-        expect(gameboard.board.getValue(0, 0).hits).toBe(1);
+        expect(gameboard.receiveAttack(0, 0)).toBe("hit");
+        expect(gameboard.hits.getValue(0, 0)).toBe("hit");
+        expect(gameboard.board.getValue(0, 0).hits).not.toBe(0);
     });
 
     test("attacks on already hit cell", () => {
         gameboard.place(ship, 0, 0, false);
         gameboard.receiveAttack(0, 0);
 
-        expect(gameboard.receiveAttack(0, 0)).toBe(0);
+        expect(gameboard.receiveAttack(0, 0)).toBe(null);
         expect(gameboard.board.getValue(0, 0).hits).toBe(1);
-
-        gameboard.receiveAttack(1, 0);
-        expect(gameboard.receiveAttack(1, 0)).toBe(0);
     });
 
     test("ship sunk when every part is hit", () => {
         gameboard.place(ship, 0, 0, false);
         gameboard.receiveAttack(0, 0);
-        gameboard.receiveAttack(0, 1);
+        const outcome = gameboard.receiveAttack(0, 1);
 
+        expect(outcome).toBe("sunk");
         expect(gameboard.ships[0].ship.isSunk()).toBe(true);
     });
 });

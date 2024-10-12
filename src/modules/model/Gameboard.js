@@ -4,7 +4,7 @@ export default class Gameboard {
     #size = 10;
     #ships = [];
     #board;
-    #hits; // -1 = miss, 0 = empty, 1 = hit
+    #hits; // can be 'miss', 0, 'hit'
 
     constructor() {
         this.#board = new Array2d(this.#size, this.#size);
@@ -57,16 +57,19 @@ export default class Gameboard {
 
     receiveAttack(row, column) {
         if (this.#hits.getValue(row, column) !== 0) {
-            return 0;
+            return null;
         }
 
         if (this.#board.getValue(row, column) === 0) {
-            this.#hits.setValue(-1, row, column);
-            return -1;
+            this.#hits.setValue("miss", row, column);
+            return "miss";
         } else {
-            this.#hits.setValue(1, row, column);
+            this.#hits.setValue("hit", row, column);
             this.#board.getValue(row, column).hit();
-            return 1;
+
+            if (this.#board.getValue(row, column).isSunk()) return "sunk";
+
+            return "hit";
         }
     }
 
