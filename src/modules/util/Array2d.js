@@ -42,7 +42,12 @@ export default class Array2d {
     }
 
     isInBounds(row, column) {
-        return 0 <= row < this.#rows && 0 <= column < this.#columns;
+        return (
+            0 <= row &&
+            row < this.#rows &&
+            0 <= column &&
+            column < this.#columns
+        );
     }
 
     getArray() {
