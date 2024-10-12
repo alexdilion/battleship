@@ -20,14 +20,6 @@ export default class Array2d {
     }
 
     getRow(row) {
-        if (this.#rows <= row || row < 0) {
-            throw new Error(
-                `Row number out of bounds. Row range: 0 - ${
-                    this.#rows - 1
-                }, row number given: ${row}`
-            );
-        }
-
         return this.#array[row];
     }
 
@@ -38,14 +30,6 @@ export default class Array2d {
     }
 
     getColumn(col) {
-        if (this.#columns <= col || col < 0) {
-            throw new Error(
-                `Column number out of bounds. Column range: 0 - ${
-                    this.#columns - 1
-                }, column number given: ${col}`
-            );
-        }
-
         return Array(this.#columns)
             .fill(0)
             .map((_, i) => this.#array[i][col]);
@@ -55,6 +39,10 @@ export default class Array2d {
         for (let i = start; i < end; i++) {
             this.setValue(value, i, column);
         }
+    }
+
+    isInBounds(row, column) {
+        return 0 <= row < this.#rows && 0 <= column < this.#columns;
     }
 
     getArray() {
@@ -72,5 +60,13 @@ export default class Array2d {
 
     isEmpty() {
         return this.#empty;
+    }
+
+    getRowSize() {
+        return this.#rows;
+    }
+
+    getColumnSize() {
+        return this.#columns;
     }
 }

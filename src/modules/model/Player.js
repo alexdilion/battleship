@@ -9,6 +9,10 @@ export default class Player {
         this.#gameboard = new Gameboard();
     }
 
+    placeShip(ship, row, column, rotated) {
+        return this.#gameboard.place(ship, row, column, rotated);
+    }
+
     get name() {
         return this.#name;
     }
