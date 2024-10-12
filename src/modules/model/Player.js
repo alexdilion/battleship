@@ -13,6 +13,15 @@ export default class Player {
         return this.#gameboard.place(ship, row, column, rotated);
     }
 
+    receiveAttack(row, column) {
+        const coord = `${row}-${column}`;
+
+        // invalid attack
+        if (!this.#gameboard.board.isInBounds(row, column)) return null;
+
+        return this.#gameboard.receiveAttack(row, column);
+    }
+
     get name() {
         return this.#name;
     }
