@@ -20,8 +20,28 @@ export default class Player {
         return result;
     }
 
+    isGameOver() {
+        return this.#gameboard.isGameOver();
+    }
+
+    reset() {
+        this.#gameboard = new Gameboard();
+    }
+
+    getShips() {
+        return this.#gameboard.ships;
+    }
+
+    getHits() {
+        return this.#gameboard.hits;
+    }
+
     get name() {
         return this.#name;
+    }
+
+    set name(newName) {
+        this.#name = newName;
     }
 
     get gameboard() {
