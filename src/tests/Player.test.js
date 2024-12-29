@@ -4,10 +4,10 @@ import Ship from "../modules/model/Ship";
 const ship = new Ship("destroyer");
 
 describe("Player constructor", () => {
-    const player = new Player("Alex");
+    const player = new Player("p");
 
     test("Player name is set", () => {
-        expect(player.name).toBe("Alex");
+        expect(player.name).toBe("p");
     });
 
     test("Player has a gameboard", () => {
@@ -70,5 +70,16 @@ describe("Attack method", () => {
         const outcome = p1.receiveAttack(100, 100);
 
         expect(outcome).toBe(null);
+    });
+});
+
+describe("Utility methods", () => {
+    const player = new Player("p");
+
+    test("Reset resets gameboard", () => {
+        player.placeShip(ship, 0, 0, false);
+        player.reset();
+        expect(player.getShips().length).toBe(0);
+        expect(player.getHits().isEmpty()).toBe(true);
     });
 });
