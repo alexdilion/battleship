@@ -14,12 +14,10 @@ export default class Player {
     }
 
     receiveAttack(row, column) {
-        const coord = `${row}-${column}`;
+        // const coord = `${row}-${column}`;
+        const result = this.#gameboard.receiveAttack(row, column);
 
-        // invalid attack
-        if (!this.#gameboard.board.isInBounds(row, column)) return null;
-
-        return this.#gameboard.receiveAttack(row, column);
+        return result;
     }
 
     get name() {

@@ -55,10 +55,15 @@ export default class Gameboard {
         return true;
     }
 
+    isValidAttack(row, column) {
+        return (
+            this.#board.isInBounds(row, column) &&
+            this.#hits.getValue(row, column) == 0
+        );
+    }
+
     receiveAttack(row, column) {
-        if (this.#hits.getValue(row, column) !== 0) {
-            return null;
-        }
+        if (!this.isValidAttack(row, column)) return null;
 
         if (this.#board.getValue(row, column) === 0) {
             this.#hits.setValue("miss", row, column);
