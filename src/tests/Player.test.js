@@ -82,4 +82,8 @@ describe("Utility methods", () => {
         expect(player.getShips().length).toBe(0);
         expect(player.getHits().isEmpty()).toBe(true);
     });
+
+    test("Is marked as a human player", () => {
+        expect(player.isPlayer()).toBe(true);
+    });
 });

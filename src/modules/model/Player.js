@@ -36,6 +36,10 @@ export default class Player {
         return this.#gameboard.hits;
     }
 
+    isPlayer() {
+        return true;
+    }
+
     get name() {
         return this.#name;
     }
