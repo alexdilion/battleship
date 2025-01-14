@@ -170,3 +170,19 @@ describe("Check if game over", () => {
         expect(gameboard.isGameOver()).toBe(true);
     });
 });
+
+describe("Utility methods", () => {
+    test("getValidAttacks returns only cells that can be attacked", () => {
+        gameboard.receiveAttack(0, 0);
+        gameboard.receiveAttack(9, 9);
+        const validAttacks = gameboard.getValidAttacks();
+
+        expect(validAttacks).toBeInstanceOf(Array);
+        expect(
+            validAttacks.every((coord) => {
+                const [row, col] = coord;
+                return gameboard.isValidAttack(row, col);
+            })
+        ).toBe(true);
+    });
+});

@@ -62,6 +62,21 @@ export default class Gameboard {
         );
     }
 
+    getValidAttacks() {
+        const boardArray = this.#board.getArray();
+        const validAttacks = [];
+
+        boardArray.forEach((row, rowIndex) => {
+            row.forEach((_, colIndex) => {
+                if (this.#hits.getValue(rowIndex, colIndex) == 0) {
+                    validAttacks.push([rowIndex, colIndex]);
+                }
+            });
+        });
+
+        return validAttacks;
+    }
+
     receiveAttack(row, column) {
         if (!this.isValidAttack(row, column)) return null;
 
