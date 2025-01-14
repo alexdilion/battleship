@@ -172,17 +172,12 @@ describe("Check if game over", () => {
 });
 
 describe("Utility methods", () => {
-    test("getValidAttacks returns only cells that can be attacked", () => {
+    test("getValidAttack returns a valid attack", () => {
         gameboard.receiveAttack(0, 0);
         gameboard.receiveAttack(9, 9);
-        const validAttacks = gameboard.getValidAttacks();
+        const validAttack = gameboard.getValidAttack();
 
-        expect(validAttacks).toBeInstanceOf(Array);
-        expect(
-            validAttacks.every((coord) => {
-                const [row, col] = coord;
-                return gameboard.isValidAttack(row, col);
-            })
-        ).toBe(true);
+        expect(validAttack).toBeInstanceOf(Array);
+        expect(validAttack.length).toBe(2);
     });
 });

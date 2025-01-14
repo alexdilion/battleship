@@ -62,19 +62,11 @@ export default class Gameboard {
         );
     }
 
-    getValidAttacks() {
-        const boardArray = this.#board.getArray();
-        const validAttacks = [];
+    getValidAttack() {
+        const validAttacks = this.#hits.getIndicesWithValue(0);
+        const randomIndex = Math.floor(Math.random() * validAttacks.length);
 
-        boardArray.forEach((row, rowIndex) => {
-            row.forEach((_, colIndex) => {
-                if (this.#hits.getValue(rowIndex, colIndex) == 0) {
-                    validAttacks.push([rowIndex, colIndex]);
-                }
-            });
-        });
-
-        return validAttacks;
+        return validAttacks[randomIndex];
     }
 
     receiveAttack(row, column) {
