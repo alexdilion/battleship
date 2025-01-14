@@ -50,6 +50,20 @@ export default class Array2d {
         );
     }
 
+    getIndicesWithValue(givenValue) {
+        const indices = [];
+
+        this.#array.forEach((row, rowIndex) => {
+            row.forEach((value, colIndex) => {
+                if (value === givenValue) {
+                    indices.push([rowIndex, colIndex]);
+                }
+            });
+        });
+
+        return indices;
+    }
+
     getArray() {
         return this.#array;
     }
