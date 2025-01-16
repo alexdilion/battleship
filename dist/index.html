@@ -5,41 +5,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Battleship</title>
         <script src="./bundle.js"></script>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <header>
-            <h1>Battleship</h1>
-        </header>
-
         <main>
+            <!-- Shown during new games. Allows decision between pve or pvp -->
             <div id="start-screen"></div>
+
+            <!-- Screen with gameboards -->
             <div id="game-screen">
-                <div class="board-wrapper" id="player1-board">
+                <div class="player-wrapper" id="player1-board">
                     <div class="player-name"></div>
+
+                    <!-- Cells forms the base layer. Ships and hits are rendered on top of it. -->
                     <div class="board">
-                        <div class="cells"></div>
-                        <div class="ships"></div>
-                        <div class="hits"></div>
+                        <div class="cells board-grid"></div>
+                        <div class="ships board-grid"></div>
+                        <div class="hits board-grid"></div>
                     </div>
                 </div>
-                <div class="board-wrapper" id="player2-board">
+                <div class="player-wrapper" id="player2-board">
                     <div class="player-name"></div>
                     <div class="board">
-                        <div class="cells"></div>
-                        <div class="ships"></div>
-                        <div class="hits"></div>
+                        <div class="cells board-grid"></div>
+                        <div class="ships board-grid"></div>
+                        <div class="hits board-grid"></div>
                     </div>
                 </div>
             </div>
+
+            <!-- Screen shown between turns -->
             <div id="intermediate-screen"></div>
+
+            <!-- Screen shown when the game is over -->
             <div id="gameover-screen"></div>
         </main>
 
         <footer>
-            <a href="https://github.com/alexdilion/battleship">
-                Project source code.
-            </a>
-            <span>Created by Alex Dilion.</span>
+            <span>
+                <a href="https://github.com/alexdilion/battleship">
+                    Source code
+                </a>
+            </span>
         </footer>
     </body>
 </html>
