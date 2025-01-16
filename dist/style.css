@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200..900&display=swap");
+
+:root {
+    --blue: #3dc1d3;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100dvh;
+    margin: 0;
+    font-family: "Source Sans 3", serif;
+}
+
+footer {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+footer a {
+    color: var(--blue);
+}
+
+.screen {
+    position: absolute;
+    height: 100dvh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+
+.center-children {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+    outline: 1px solid black;
+    width: 3rem;
+    height: 3rem;
+}
+
+.game-wrapper {
+    display: flex;
+    gap: 4rem;
+}
+
+.player-name {
+    margin-top: 0;
+}
